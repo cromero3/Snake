@@ -236,7 +236,7 @@ class SnakeGame extends SurfaceView implements Runnable{
             mCanvas.drawText("PAUSE", 1800, 120, mPaint);
 
             // Draw the apple and the snake
-            mPaint.setColor(Color.argb(255, 0, 0, 180));
+            mPaint.setColor(Color.argb(255, 0, 0, 128));
             mCanvas.drawText("Chris Romero", 1500, 220, mPaint);
             mCanvas.drawText("Tran Chi", 1500, 320, mPaint);
 
