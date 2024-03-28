@@ -48,6 +48,9 @@ class SnakeGame extends SurfaceView implements Runnable{
     // And an apple
     private Apple mApple;
 
+    private Background mBackground;
+
+
 
     // This is the constructor method that gets called
     // from SnakeActivity
@@ -56,6 +59,9 @@ class SnakeGame extends SurfaceView implements Runnable{
 
         // Work out how many pixels each block is
         int blockSize = size.x / NUM_BLOCKS_WIDE;
+
+        mBackground = new Background(context, new Point(NUM_BLOCKS_WIDE, mNumBlocksHigh), blockSize);
+
         // How many blocks of the same size will fit into the height
         mNumBlocksHigh = size.y / blockSize;
 
@@ -201,7 +207,7 @@ class SnakeGame extends SurfaceView implements Runnable{
             mCanvas = mSurfaceHolder.lockCanvas();
 
             // Fill the screen with a color
-            mCanvas.drawColor(Color.argb(255, 26, 128, 182));
+            mBackground.draw(mCanvas, mPaint);
 
             // Set the size and color of the mPaint for the text
             mPaint.setColor(Color.argb(255, 255, 255, 255));
