@@ -1,63 +1,39 @@
 package com.example.snake;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import java.util.Random;
 
-class Apple{
-
-    // The location of the apple on the grid
-    // Not in pixels
-    private Point location = new Point();
+public class Apple extends GameObject {
 
     // The range of values we can choose from
     // to spawn an apple
     private Point mSpawnRange;
     private int mSize;
 
-    // An image to represent the apple
-    private Bitmap mBitmapApple;
+    public Apple(Context context, Point sr, int s, int resourceId) {
 
-    /// Set up the apple in the constructor
-    Apple(Context context, Point sr, int s){
+        /// Set up the apple in the constructor
+        super(context, new Point(-10, -10), s, resourceId);
 
-        // Make a note of the passed in spawn range
-        mSpawnRange = sr;
+        // The range of values we can choose from
+        this.mSpawnRange = sr;
         // Make a note of the size of an apple
-        mSize = s;
-        // Hide the apple off-screen until the game starts
-        location.x = -10;
-
-        // Load the image to the bitmap
-        mBitmapApple = BitmapFactory.decodeResource(context.getResources(), R.drawable.apple);
-
-        // Resize the bitmap
-        mBitmapApple = Bitmap.createScaledBitmap(mBitmapApple, s, s, false);
-    }
-
-    // This is called every time an apple is eaten
-    void spawn(){
-        // Choose two random values and place the apple
-        Random random = new Random();
-        location.x = random.nextInt(mSpawnRange.x) + 1;
-        location.y = random.nextInt(mSpawnRange.y - 1) + 1;
-    }
-
-    // Let SnakeGame know where the apple is
-    // SnakeGame can share this with the snake
-    Point getLocation(){
-        return location;
+        this.mSize = s;
     }
 
     // Draw the apple
-    void draw(Canvas canvas, Paint paint){
-        canvas.drawBitmap(mBitmapApple,
-                location.x * mSize, location.y * mSize, paint);
-
+    @Override
+    public void draw(Canvas canvas, Paint paint) {
+        canvas.drawBitmap(bitmap, location.x * mSize, location.y * mSize, paint);
     }
 
+    // This is called every time an apple is eaten
+    void spawn() {
+        Random random = new Random();
+        location.x = random.nextInt(mSpawnRange.x - 1) + 1;
+        location.y = random.nextInt(mSpawnRange.y - 1) + 1;
+    }
 }

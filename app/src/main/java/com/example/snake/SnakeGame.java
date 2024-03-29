@@ -117,14 +117,14 @@ class SnakeGame extends SurfaceView implements GameInterface, Runnable {
 
         // Call the constructors of our two game objects
         mApple = new Apple(context,
-                new Point(NUM_BLOCKS_WIDE,
-                        mNumBlocksHigh),
-                blockSize);
+                new Point(NUM_BLOCKS_WIDE, mNumBlocksHigh),
+                blockSize,
+                R.drawable.apple);
 
         mSnake = new Snake(context,
-                new Point(NUM_BLOCKS_WIDE,
-                        mNumBlocksHigh),
-                blockSize);
+                new Point(NUM_BLOCKS_WIDE, mNumBlocksHigh),
+                blockSize,
+                R.drawable.head);
 
     }
 
