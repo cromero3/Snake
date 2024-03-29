@@ -15,7 +15,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.io.IOException;
-
+import android.graphics.Typeface;
 import android.graphics.RectF;
 
 
@@ -53,13 +53,16 @@ class SnakeGame extends SurfaceView implements Runnable{
 
     private Background mBackground;
 
-
     private RectF pauseButtonRectF;
+
+    private Typeface font;
 
     // This is the constructor method that gets called
     // from SnakeActivity
     public SnakeGame(Context context, Point size) {
         super(context);
+
+        font = Typeface.createFromAsset(context.getAssets(), "font.ttf");
 
         // Define the coordinates and dimensions of the pause button
         int buttonWidth = 400;
@@ -213,13 +216,15 @@ class SnakeGame extends SurfaceView implements Runnable{
 
     }
 
-
     // Do all the drawing
     public void draw() {
 
         // Get a lock on the mCanvas
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
+
+            // Change the font
+            mPaint.setTypeface(font);
 
             // Fill the screen with a color
             mBackground.draw(mCanvas, mPaint);
