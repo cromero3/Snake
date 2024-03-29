@@ -19,7 +19,7 @@ import java.io.IOException;
 import android.graphics.RectF;
 
 
-class SnakeGame extends SurfaceView implements Runnable{
+class SnakeGame extends SurfaceView implements GameInterface, Runnable {
 
     // Objects for the game loop/thread
     private Thread mThread = null;
@@ -166,20 +166,19 @@ class SnakeGame extends SurfaceView implements Runnable{
         final long TARGET_FPS = 10;
         // There are 1000 milliseconds in a second
         final long MILLIS_PER_SECOND = 1000;
-
+        long currentTime = System.currentTimeMillis();
         // Are we due to update the frame
-        if(mNextFrameTime <= System.currentTimeMillis()){
+        if(mNextFrameTime <= currentTime){
             // Tenth of a second has passed
 
             // Setup when the next update will be triggered
-            mNextFrameTime =System.currentTimeMillis()
+            mNextFrameTime = currentTime
                     + MILLIS_PER_SECOND / TARGET_FPS;
 
-            // Return true so that the update and draw
-            // methods are executed
+            // Return true when there is a require to update
             return true;
         }
-
+        // no update require return false
         return false;
     }
 
@@ -316,7 +315,7 @@ class SnakeGame extends SurfaceView implements Runnable{
     // Start the thread
     public void resume() {
         mPlaying = true;
-        mThread = new Thread(this);
+        mThread = new Thread((java.lang.Runnable) this);
         mThread.start();
     }
 }
