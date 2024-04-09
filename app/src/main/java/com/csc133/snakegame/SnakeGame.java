@@ -249,7 +249,7 @@ class SnakeGame extends SurfaceView implements Runnable, GameControls{
             mPaint.setTypeface(gameFont);
 
             // Calculate the position for "Jacob & Adiba" to appear in the top right corner
-            String names = "Jacob & Adiba";
+            String names = "Group 5";
             float textWidth = mPaint.measureText(names);
             float xPositionNames = mCanvas.getWidth() - textWidth - 20; // 20 pixels from the right edge
             float yPositionNames = 60; // 60 pixels from the top
