@@ -43,6 +43,8 @@ class Snake implements DrawableMovable{
     // A bitmap for the body
     private Bitmap mBitmapBody;
 
+    int scaleFactor = 3;
+
 
     Snake(Context context, Point mr, int ss) {
 
@@ -76,7 +78,7 @@ class Snake implements DrawableMovable{
         // in the correct direction
         mBitmapHeadRight = Bitmap
                 .createScaledBitmap(mBitmapHeadRight,
-                        ss, ss, false);
+                        ss * scaleFactor, ss * scaleFactor, false);
 
         // A matrix for scaling
         Matrix matrix = new Matrix();
@@ -84,20 +86,20 @@ class Snake implements DrawableMovable{
 
         mBitmapHeadLeft = Bitmap
                 .createBitmap(mBitmapHeadRight,
-                        0, 0, ss, ss, matrix, true);
+                        0, 0, ss * scaleFactor, ss * scaleFactor, matrix, true);
 
         // A matrix for rotating
         matrix.preRotate(-90);
         mBitmapHeadUp = Bitmap
                 .createBitmap(mBitmapHeadRight,
-                        0, 0, ss, ss, matrix, true);
+                        0, 0, ss * scaleFactor, ss * scaleFactor, matrix, true);
 
         // Matrix operations are cumulative
         // so rotate by 180 to face down
         matrix.preRotate(180);
         mBitmapHeadDown = Bitmap
                 .createBitmap(mBitmapHeadRight,
-                        0, 0, ss, ss, matrix, true);
+                        0, 0, ss * scaleFactor, ss * scaleFactor, matrix, true);
 
         // Create and scale the body
         mBitmapBody = BitmapFactory
