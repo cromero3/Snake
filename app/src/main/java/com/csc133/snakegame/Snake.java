@@ -43,7 +43,7 @@ class Snake implements DrawableMovable{
     // A bitmap for the body
     private Bitmap mBitmapBody;
 
-    int scaleFactor = 3;
+    private static final int scaleFactor = 3;
 
 
     Snake(Context context, Point mr, int ss) {
