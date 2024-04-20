@@ -233,47 +233,40 @@ class Snake implements DrawableMovable{
         if (!segmentLocations.isEmpty()) {
             // Existing drawing code...
             // Draw the head
+            // Calculate the offset to center the bitmap around the head location
+
+            int offsetX = (mBitmapHeadRight.getWidth() - mSegmentSize) / 2;
+            int offsetY = (mBitmapHeadRight.getHeight() - mSegmentSize) / 2;
+
+            Point headLocation = segmentLocations.get(0);
+            float headX = headLocation.x * mSegmentSize - offsetX;
+            float headY = headLocation.y * mSegmentSize - offsetY;
+
             switch (heading) {
                 case RIGHT:
-                    canvas.drawBitmap(mBitmapHeadRight,
-                            segmentLocations.get(0).x
-                                    * mSegmentSize,
-                            segmentLocations.get(0).y
-                                    * mSegmentSize, paint);
+                    canvas.drawBitmap(mBitmapHeadRight, headX, headY, paint);
                     break;
 
                 case LEFT:
-                    canvas.drawBitmap(mBitmapHeadLeft,
-                            segmentLocations.get(0).x
-                                    * mSegmentSize,
-                            segmentLocations.get(0).y
-                                    * mSegmentSize, paint);
+                    canvas.drawBitmap(mBitmapHeadLeft, headX, headY, paint);
                     break;
 
                 case UP:
-                    canvas.drawBitmap(mBitmapHeadUp,
-                            segmentLocations.get(0).x
-                                    * mSegmentSize,
-                            segmentLocations.get(0).y
-                                    * mSegmentSize, paint);
+                    canvas.drawBitmap(mBitmapHeadUp, headX, headY, paint);
                     break;
 
                 case DOWN:
-                    canvas.drawBitmap(mBitmapHeadDown,
-                            segmentLocations.get(0).x
-                                    * mSegmentSize,
-                            segmentLocations.get(0).y
-                                    * mSegmentSize, paint);
+                    canvas.drawBitmap(mBitmapHeadDown, headX, headY, paint);
                     break;
             }
 
             // Draw the snake body one block at a time
             for (int i = 1; i < segmentLocations.size(); i++) {
-                canvas.drawBitmap(mBitmapBody,
-                        segmentLocations.get(i).x
-                                * mSegmentSize,
-                        segmentLocations.get(i).y
-                                * mSegmentSize, paint);
+                Point bodyLocation = segmentLocations.get(i);
+                float bodyX = bodyLocation.x * mSegmentSize;
+                float bodyY = bodyLocation.y * mSegmentSize;
+
+                canvas.drawBitmap(mBitmapBody, bodyX, bodyY, paint);
             }
         }
     }
